@@ -1,0 +1,6 @@
+.btn.active {
+  border: 1px solid #23be0a;
+  /* background-color: rgb(86, 194, 86); */
+  background-color: transparent;
+  color: #23be0a;
+}
