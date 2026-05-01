@@ -12,13 +12,18 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink className="btn mx-2" to="/book">
-          Book
+          Listed Books
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className="btn mx-2" to="/">
+          Pages to read
         </NavLink>
       </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 my-5">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -50,8 +55,9 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end flex gap-2">
+        <a className="btn btn-success text-white">Sign In</a>
+        <a className="btn btn-info text-white">Sign Up</a>
       </div>
     </div>
   );
