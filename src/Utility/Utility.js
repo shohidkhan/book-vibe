@@ -14,6 +14,21 @@ export const getStoredWishlistBooks = () => {
   return [];
 };
 
+export const removeBook = (id, type) => {
+  if (type === "read") {
+    const getAllStoredBooks = getStoredBooks();
+    const booksFilter = getAllStoredBooks.filter((b) => b !== id);
+    const restBooks = JSON.stringify(booksFilter);
+    localStorage.setItem("readBooks", restBooks);
+  }
+  if (type === "wishlist") {
+    const getAllWishlistBooks = getStoredWishlistBooks();
+    const wishlistBookFilter = getAllWishlistBooks.filter((b) => b !== id);
+    const restWishlistBooks = JSON.stringify(wishlistBookFilter);
+    localStorage.setItem("wishlistBooks", restWishlistBooks);
+  }
+};
+
 export const addToReadBooks = (bookId) => {
   const storedBooks = getStoredBooks();
   if (storedBooks.includes(bookId)) {

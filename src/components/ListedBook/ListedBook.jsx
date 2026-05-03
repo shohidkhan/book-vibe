@@ -1,14 +1,23 @@
 import { MapPinHouse, NotebookText, Users } from "lucide-react";
-import React from "react";
 import { Link } from "react-router";
+import {
+  getStoredBooks,
+  getStoredWishlistBooks,
+  removeBook,
+} from "../../Utility/Utility";
 
-const ListedBook = ({ book }) => {
+const ListedBook = ({
+  book,
+  setStoredBooks,
+  allBooks,
+  type,
+  setStoredWishlistBooks,
+}) => {
   const {
     bookId,
     bookName,
     author,
     image,
-    review,
     totalPages,
     rating,
     category,
@@ -16,6 +25,28 @@ const ListedBook = ({ book }) => {
     publisher,
     yearOfPublishing,
   } = book;
+
+  // const [allBooks, setAllBooks] = useState([]);
+
+  const handleRemoveReadBookFromStore = (book, type) => {
+    if (type == "read") {
+      removeBook(book.bookId, type);
+      const storedAllReadBooks = getStoredBooks();
+      const restBooksFilter = allBooks.filter((b) =>
+        storedAllReadBooks.includes(b.bookId),
+      );
+      setStoredBooks(restBooksFilter);
+    }
+
+    if (type == "wishlist") {
+      removeBook(book.bookId, type);
+      const allWishlistStoredBooks = getStoredWishlistBooks();
+      const restWishlistBooksFilter = allBooks.filter((b) =>
+        allWishlistStoredBooks.includes(b.bookId),
+      );
+      setStoredWishlistBooks(restWishlistBooksFilter);
+    }
+  };
   return (
     <div className="p-5 my-3 flex gap-5 border border-gray-300 rounded-lg">
       <div className="bg-[#ececec] rounded-lg p-5 flex justify-center items-center">
@@ -26,7 +57,7 @@ const ListedBook = ({ book }) => {
           <h1 className="text-xl font-bold">{bookName}</h1>
           <p className="text-base text-gray-500">By : {author}</p>
         </div>
-        <div className="flex gap-3 pt-5 border-gray-600">
+        <div className="flex items-center gap-3 pt-5 border-gray-600">
           <strong className="text-sm">Tags :</strong>
           {tags.map((tag, index) => (
             <span
@@ -41,7 +72,7 @@ const ListedBook = ({ book }) => {
             Year of Publishing: {yearOfPublishing}
           </span>
         </div>
-        <div className="flex gap-10 pb-3 border-b border-gray-200 pt-5 ">
+        <div className="flex gap-10 items-center pb-3 border-b border-gray-200 pt-5 ">
           <span className="text-sm text-gray-400 flex gap-2 items-center">
             <Users size={16} color="#b0b0b0" />
             <strong>Publisher:</strong> {publisher}
@@ -64,6 +95,12 @@ const ListedBook = ({ book }) => {
           >
             View Details
           </Link>
+          <button
+            onClick={() => handleRemoveReadBookFromStore(book, type)}
+            className="bg-red-500 cursor-pointer text-sm text-white px-5 py-1 rounded-full"
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>

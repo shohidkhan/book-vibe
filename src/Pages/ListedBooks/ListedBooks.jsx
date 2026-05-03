@@ -39,12 +39,26 @@ const ListedBooks = () => {
 
         <TabPanel>
           {storedBooks.map((book) => (
-            <ListedBook key={book.bookId} book={book}></ListedBook>
+            <ListedBook
+              key={book.bookId}
+              book={book}
+              setStoredBooks={setStoredBooks}
+              allBooks={allBooks}
+              setStoredWishlistBooks={setStoredWishlistBooks}
+              type="read"
+            ></ListedBook>
           ))}
         </TabPanel>
         <TabPanel>
           {storedWishlistBooks.map((book) => (
-            <ListedBook key={book.bookId} book={book}></ListedBook>
+            <ListedBook
+              key={book.bookId}
+              book={book}
+              setStoredBooks={setStoredBooks}
+              allBooks={allBooks}
+              setStoredWishlistBooks={setStoredWishlistBooks}
+              type="wishlist"
+            ></ListedBook>
           ))}
         </TabPanel>
       </Tabs>
