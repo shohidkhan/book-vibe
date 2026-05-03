@@ -8,6 +8,7 @@ const Home = () => {
   // console.log(data);
   return (
     <div>
+      <title>Find Books - Home</title>
       <Banner />
       <Books data={data} />
     </div>

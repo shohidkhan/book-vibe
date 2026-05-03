@@ -15,11 +15,11 @@ const Navbar = () => {
           Listed Books
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink className="btn mx-2" to="/">
           Pages to read
         </NavLink>
-      </li>
+      </li> */}
     </>
   );
   return (
